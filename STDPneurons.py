@@ -1,29 +1,16 @@
-"""
-This is the code for lab1.  It's python.  
-If code is inside these triple quotes, it's a comment.
-You can also have a comment from a #, but it's just
-until the end of the line.
-"""
-
-#import the cod for the pyNN nest interface.
+#import the code for the pyNN nest interface.
 import pyNN.nest as sim
 
-#set up some constants in all caps for my style.
 RUN_DURATION = 100
 TIME_STEP = 0.1
 
 numberNeurons = 1
 
-#Anything that starts with a def is a function.
-#Remember python uses indenting for blocks.  So this one ends at the
-#next def.
 def makeDCSource():
     clamp =  sim.DCSource(amplitude=0.8, start=20.0, stop=80.0)
     return (clamp)
 
-#Python functions don't need to return anything.
 def makeSynapses(pre_synaptic_neuron, post_synaptic_neuron):
-    #Make a spike source
     stdp_model = sim.STDPMechanism(
             timing_dependence = sim.SpikePairRule(tau_plus=5.0, tau_minus=5.0, A_plus = 0.0001, A_minus = 0.0001),
             weight_dependence = sim.MultiplicativeWeightDependence(w_min = 0.0, w_max=0.01), 
