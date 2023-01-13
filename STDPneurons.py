@@ -3,7 +3,7 @@ import pyNN.nest as sim
 
 RUN_DURATION = 100
 TIME_STEP = 0.1
-
+INITIAL_WEIGHT = 0.2
 numberNeurons = 1
 
 def makeDCSource():
@@ -19,7 +19,7 @@ def makeSynapses(pre_synaptic_neuron, post_synaptic_neuron):
             dendritic_delay_fraction = float(1))
    
     #make a synapse
-    firingWt = 0.2
+    firingWt = INITIAL_WEIGHT 
     connector = []
     connector = connector + [(0,0,firingWt,TIME_STEP)]
     fromListConnector = sim.FromListConnector(connector)
@@ -47,4 +47,4 @@ post_synaptic_neuron.write_data("post_synaptic_stdp_Spikes.pkl",'spikes')
 
 synapseWeight = synapse.get(["weight"], format="list")
 
-print(synapseWeight)
+print("Synaptic weight. Initial: ", INITIAL_WEIGHT, " Final: ", synapseWeight)
