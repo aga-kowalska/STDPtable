@@ -30,12 +30,12 @@ def makeSynapses(pre_synaptic_neuron, post_synaptic_neuron):
 #----main---
 sim.setup(timestep=TIME_STEP,min_delay=TIME_STEP, max_delay=TIME_STEP, debug=0)
 
-post_synaptic_neuron=sim.Population(numberNeurons,sim.IF_cond_exp,  cellparams={})
+post_synaptic_neuron=sim.Population(1,sim.IF_cond_exp,  cellparams={})
 pre_synaptic_neuron=sim.Population(1,sim.IF_cond_exp,cellparams={})
 
 
 post_synaptic_neuron.record({'spikes'})
-
+pre_synaptic_neuron.record({'spikes'})
 dCSource = makeDCSource()
 pre_synaptic_neuron.inject(dCSource)
 
@@ -44,7 +44,7 @@ synapse = makeSynapses(pre_synaptic_neuron, post_synaptic_neuron)
 sim.run(RUN_DURATION)
 
 post_synaptic_neuron.write_data("post_synaptic_stdp_Spikes.pkl",'spikes')
-
+pre_synaptic_neuron.write_data("pre_synaptic_stdp_Spikes.pkl",'spikes')
 synapseWeight = synapse.get(["weight"], format="list")
 
 print("Synaptic weight. Initial: ", INITIAL_WEIGHT, " Final: ", synapseWeight)
